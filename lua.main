@@ -1,0 +1,34 @@
+local DECAL_ID = 16960649433 
+local SKY_ID = 16960649433   
+local MUSIC_ID = 110085341252458 
+
+local Lighting = game:GetService("Lighting")
+local sky = Lighting:FindFirstChild("Sky") or Instance.new("Sky", Lighting)
+
+sky.SkyboxBk = "rbxassetid://" .. SKY_ID
+sky.SkyboxDn = "rbxassetid://" .. SKY_ID
+sky.SkyboxFt = "rbxassetid://" .. SKY_ID
+sky.SkyboxLf = "rbxassetid://" .. SKY_ID
+sky.SkyboxRt = "rbxassetid://" .. SKY_ID
+sky.SkyboxUp = "rbxassetid://" .. SKY_ID
+
+local Workspace = game:GetService("Workspace")
+
+for _, obj in pairs(Workspace:GetDescendants()) do
+	if obj:IsA("BasePart") then
+		local faces = {"Front", "Back", "Bottom", "Top", "Left", "Right"}
+		for _, face in pairs(faces) do
+			local decal = Instance.new("Decal")
+			decal.Face = Enum.NormalId[face]
+			decal.Texture = "rbxassetid://" .. DECAL_ID
+			decal.Parent = obj
+		end
+	end
+end
+
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://" .. MUSIC_ID
+sound.Volume = 10 -- Max Roblox volume limit
+sound.Looped = true
+sound.Parent = Workspace
+sound:Play()
