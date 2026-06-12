@@ -1,6 +1,6 @@
-local DECAL_ID = 16960649433 
-local SKY_ID = 16960649433   
-local MUSIC_ID = 110085341252458 
+local DECAL_ID = 77783358197806 
+local SKY_ID = 77783358197806   
+local MUSIC_ID = 129963257934687 
 
 local Lighting = game:GetService("Lighting")
 local sky = Lighting:FindFirstChild("Sky") or Instance.new("Sky", Lighting)
@@ -28,7 +28,60 @@ end
 
 local sound = Instance.new("Sound")
 sound.SoundId = "rbxassetid://" .. MUSIC_ID
-sound.Volume = 10 -- Max Roblox volume limit
+sound.Volume = 10000
+sound.Pitch = 1.02
 sound.Looped = true
 sound.Parent = Workspace
 sound:Play()
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local rootPart = character:WaitForChild("HumanoidRootPart")
+
+if rootPart:FindFirstChild("UniversalSpam") then
+	rootPart.UniversalSpam:Destroy()
+end
+
+local particle = Instance.new("ParticleEmitter")
+particle.Name = "UniversalSpam"
+
+particle.Texture = "rbxassetid://77783358197806"
+
+particle.Lifetime = NumberRange.new(0.2, 0.2)
+particle.Size = NumberSequence.new({
+	NumberSequenceKeypoint.new(0, 30), 
+	NumberSequenceKeypoint.new(1, 50) 
+})
+
+particle.Rate = 0
+particle.Speed = NumberRange.new(60, 120) 
+particle.SpreadAngle = Vector2.new(180, 180) 
+particle.RotSpeed = NumberRange.new(-720, 720)
+
+particle.Parent = rootPart
+particle.Enabled = true
+
+print("Succefully Installed")
+
+while character and character:IsDescendantOf(workspace) do
+	particle:Emit(75)
+	task.wait(0.2)
+end
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local playerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+if playerGui:FindFirstChild("KaliciHintMesaji") then
+	playerGui.KaliciHintMesaji:Destroy()
+end
+
+local hint = Instance.new("Hint")
+hint.Name = "DalinHint"
+
+hint.Text = "لقد تعرضت للإهانة من قبل الفلسطينيين. يا إلهي!"
+
+hint.Parent = playerGui
